@@ -145,6 +145,7 @@
                 <file name="src/Sorghum.js"/>
                 <file name="src/SysMenu.js"/>
                 <file name="src/ScoreLayout.js"/>
+                <file name="src/ResultLayout.js"/>
                 <file name="main.js"/>
 
             </sources>
