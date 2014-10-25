@@ -22,50 +22,9 @@
 <body style="padding:0; margin: 0; background: #000;">
 <canvas id="gameCanvas"></canvas>
 
-<script src="game.min.js"></script>
 <script>
-    function onBridgeReady() {
-        var mainTitle="我和女神周迅",
-            mainDesc="收获报告：我帮女神收获了" + G_ScoreLayout._tmpScore + "颗高粱,获得称号" + ScoreLevel;
-            mainURL="http://xiaoliang2535.github.io/html5Games/sorghum/index.html",
-            mainImgUrl= "http://xiaoliang2535.github.io/html5Games/sorghum/res/share_img.jpg";
-        WeixinJSBridge.on("menu:share:timeline", function(e) {
-            var data = {
-                img_url:mainImgUrl,
-                img_width: "120",
-                img_height: "120",
-                link: mainURL,
-                desc: mainDesc,
-                title: mainTitle
-            };
-            WeixinJSBridge.invoke("shareTimeline", data, function(res) {
-                WeixinJSBridge.log(res.err_msg)
-            });
-        });
-        WeixinJSBridge.on("menu:share:weibo", function() {
-            WeixinJSBridge.invoke("shareWeibo", {
-                "content": mainDesc,
-                "url": mainURL
-            }, function(res) {
-                WeixinJSBridge.log(res.err_msg);
-            });
-        });
-        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
-            WeixinJSBridge.invoke("sendAppMessage", {
-                img_url: mainImgUrl,
-                img_width: "120",
-                img_height: "120",
-                link: mainURL,
-                desc: mainDesc,
-                title: mainTitle
-            }, function(res) {
-                WeixinJSBridge.log(res.err_msg)
-            });
-        });
-    };
-    document.addEventListener('WeixinJSBridgeReady', function() {
-        onBridgeReady();
-    });
+    BASE_PATH = "http://192.168.1.100/sorghum/";
 </script>
+<script src="game.min.js"></script>
 </body>
 </html>
