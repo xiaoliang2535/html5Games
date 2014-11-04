@@ -9,7 +9,7 @@
     <meta name="screen-orientation" content="portrait"/>
     <meta name="x5-fullscreen" content="yes"/>
     <meta name="360-fullscreen" content="yes"/>
-    <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <style>
         body, canvas, div {
             -moz-user-select: none;
@@ -25,7 +25,52 @@
 
 <script>
     BASE_PATH = "http://xiaoliang2535.github.io/html5Games/sorghum/";
-    BASE_DESC = "我和周迅种好了高粱，周旭喊你收收高粱";
+    IMG_PATH = "http://xiaoliang2535.github.io/html5Games/sorghum/res/share_img.jpg";
+    BASE_DESC = "我和周迅种好了高粱，周迅喊你收高粱";
+
+    function onBridgeReady() {
+        var mainTitle="我帮周迅收高粱",
+                mainDesc= TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
+                mainURL= BASE_PATH + "/index.html",
+                mainImgUrl= IMG_PATH;
+
+        WeixinJSBridge.on("menu:share:timeline", function(e) {
+            WeixinJSBridge.invoke("shareTimeline", {
+                img_url: mainImgUrl,
+                img_width: "120",
+                img_height: "120",
+                link: mainURL,
+                title: BASE_DESC,//TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
+                desc: mainTitle
+            }, function(res) {
+                WeixinJSBridge.log(res.err_msg)
+            });
+        });
+        WeixinJSBridge.on("menu:share:weibo", function() {
+            WeixinJSBridge.invoke("shareWeibo", {
+                "content": BASE_DESC,//TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
+                "url": mainURL
+            }, function(res) {
+                WeixinJSBridge.log(res.err_msg);
+            });
+        });
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke("sendAppMessage", {
+                img_url: mainImgUrl,
+                img_width: "120",
+                img_height: "120",
+                link: mainURL,
+                desc: BASE_DESC,//TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
+                title: mainTitle
+            }, function(res) {
+                WeixinJSBridge.log(res.err_msg)
+            });
+        });
+    };
+
+    document.addEventListener('WeixinJSBridgeReady', function() {
+        onBridgeReady();
+    });
 </script>
 <script src="game.min.js"></script>
 </body>
