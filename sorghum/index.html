@@ -22,7 +22,7 @@
 </head>
 <body style="padding:0; margin: 0; background: #000;">
 <canvas id="gameCanvas"></canvas>
-
+<script src="frameworks/cocos2d-html5/CCBoot.js"></script>
 <script>
     BASE_PATH = "http://xiaoliang2535.github.io/html5Games/sorghum/";
     IMG_PATH = "http://xiaoliang2535.github.io/html5Games/sorghum/res/share_img.jpg";
@@ -40,7 +40,7 @@
                 img_width: "120",
                 img_height: "120",
                 link: mainURL,
-                title: BASE_DESC,//TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
+                title: TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
                 desc: mainTitle
             }, function(res) {
                 WeixinJSBridge.log(res.err_msg)
@@ -48,7 +48,7 @@
         });
         WeixinJSBridge.on("menu:share:weibo", function() {
             WeixinJSBridge.invoke("shareWeibo", {
-                "content": BASE_DESC,//TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
+                "content": TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
                 "url": mainURL
             }, function(res) {
                 WeixinJSBridge.log(res.err_msg);
@@ -60,7 +60,7 @@
                 img_width: "120",
                 img_height: "120",
                 link: mainURL,
-                desc: BASE_DESC,//TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
+                desc: TotalScore!=0?"收获报告：我帮周迅收获了" + TotalScore + "颗高粱,获得" + ScoreLevel + "称号":BASE_DESC,
                 title: mainTitle
             }, function(res) {
                 WeixinJSBridge.log(res.err_msg)
@@ -72,6 +72,6 @@
         onBridgeReady();
     });
 </script>
-<script src="game.min.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
